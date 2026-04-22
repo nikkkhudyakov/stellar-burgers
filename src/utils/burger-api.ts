@@ -1,10 +1,31 @@
 import { setCookie, getCookie } from './cookie';
 import { TIngredient, TOrder, TOrdersData, TUser } from './types';
 
-const URL = process.env.BURGER_API_URL;
+const URL =
+  process.env.BURGER_API_URL?.trim() ||
+  'https://norma.education-services.ru/api';
 
-const checkResponse = <T>(res: Response): Promise<T> =>
-  res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+const checkResponse = async <T>(res: Response): Promise<T> => {
+  const contentType = res.headers.get('content-type') || '';
+  if (!contentType.includes('application/json')) {
+    const text = await res.text();
+    return Promise.reject(
+      new Error(
+        `API returned non-JSON response (${res.status}). Check BURGER_API_URL. Response starts with: ${text.slice(
+          0,
+          80
+        )}`
+      )
+    );
+  }
+
+  const data = await res.json();
+  if (!res.ok) {
+    return Promise.reject(data);
+  }
+
+  return data;
+};
 
 type TServerResponse<T> = {
   success: boolean;
