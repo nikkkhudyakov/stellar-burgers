@@ -25,9 +25,11 @@ describe('Страница конструктора бургера', () => {
       .contains('button', 'Добавить')
       .click();
 
-    cy.contains('Флюоресцентная булка R2-D3 (верх)').should('exist');
-    cy.contains('Флюоресцентная булка R2-D3 (низ)').should('exist');
-    cy.contains('Биокотлета из марсианской Магнолии').should('exist');
+    cy.get('[data-cy="burger-constructor"]').within(() => {
+      cy.contains('Флюоресцентная булка R2-D3 (верх)').should('exist');
+      cy.contains('Флюоресцентная булка R2-D3 (низ)').should('exist');
+      cy.contains('Биокотлета из марсианской Магнолии').should('exist');
+    });
   });
 
   it('открывает модальное окно ингредиента и закрывает по крестику', () => {
