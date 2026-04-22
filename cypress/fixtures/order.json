@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "name": "Краторный бургер",
+  "order": {
+    "_id": "order-1",
+    "status": "done",
+    "name": "Краторный бургер",
+    "createdAt": "2026-04-22T10:00:00.000Z",
+    "updatedAt": "2026-04-22T10:00:00.000Z",
+    "number": 12345,
+    "price": 2400,
+    "owner": {
+      "name": "Test User",
+      "email": "test@example.com",
+      "createdAt": "2026-04-22T10:00:00.000Z",
+      "updatedAt": "2026-04-22T10:00:00.000Z"
+    }
+  }
+}
